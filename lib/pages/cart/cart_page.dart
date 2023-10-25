@@ -59,13 +59,13 @@ class _CartPageState extends State<CartPage> {
                   right: 20.0,
                   bottom: 72.0,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const SizedBox(
                         width: 30,
                       ),
                       Expanded(
-                        child: AppElevatedButton.smallOutline(
+                        child: AppElevatedButton(
                           onPressed: () {},
                           text: 'Popular',
                         ),
@@ -74,7 +74,7 @@ class _CartPageState extends State<CartPage> {
                         width: 70,
                       ),
                       Expanded(
-                        child: AppElevatedButton.smallOutline(
+                        child: AppElevatedButton(
                           text: 'LiveStream',
                         ),
                       ),

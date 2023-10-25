@@ -1,28 +1,22 @@
 import 'dart:io';
 
 import 'package:capstone_flutter/components/app_avartar.dart';
-import 'package:capstone_flutter/components/app_bar/foodie_app_bar1.dart';
+import 'package:capstone_flutter/components/app_bar/foodie_app_bar3.dart';
 import 'package:capstone_flutter/components/button/app_elevated_button.dart';
-import 'package:capstone_flutter/components/gen/assets_gen.dart';
 import 'package:capstone_flutter/pages/auth/edit_page.dart';
-import 'package:capstone_flutter/pages/following_page.dart';
 import 'package:capstone_flutter/resources/app_color.dart';
 import 'package:capstone_flutter/services/share_prefs.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-class InformationPage extends StatefulWidget {
-  const InformationPage({
-    super.key,
-  });
+class FollowingPage extends StatefulWidget {
+  const FollowingPage({super.key});
 
   @override
-  State<InformationPage> createState() => _InformationPageState();
-
-  Size get preferredSize => const Size.fromHeight(86.0);
+  State<FollowingPage> createState() => _FollowingPageState();
 }
 
-class _InformationPageState extends State<InformationPage> {
+class _FollowingPageState extends State<FollowingPage> {
   SharedPrefs prefs = SharedPrefs();
   String? avatar;
 
@@ -51,8 +45,8 @@ class _InformationPageState extends State<InformationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: FoodieAppBar1(
-        title: 'Thông Tin Cá Nhân         ',
+      appBar: FoodieAppBar3(
+        title: 'Following       ',
       ),
       body: Stack(
         children: [
@@ -107,23 +101,23 @@ class _InformationPageState extends State<InformationPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    AppElevatedButton(
+                    AppElevatedButton.outline(
                       text: 'Người Theo Dõi',
                     ),
                     const SizedBox(
                       width: 10.0,
                     ),
-                    AppElevatedButton(
+                    AppElevatedButton.outline(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => FollowingPage()));
+                            builder: (context) => const FollowingPage()));
                       },
                       text: 'Đang Theo Dõi',
                     ),
                     const SizedBox(
                       width: 10.0,
                     ),
-                    AppElevatedButton(
+                    AppElevatedButton.outline(
                       text: 'Món Ăn',
                     ),
                   ],
@@ -133,7 +127,7 @@ class _InformationPageState extends State<InformationPage> {
                 ),
                 const Positioned(
                   child: Text(
-                    'Món ăn của bạn',
+                    'Người theo dõi',
                     style: TextStyle(
                       fontSize: 20.0,
                       color: AppColor.black,
@@ -149,70 +143,59 @@ class _InformationPageState extends State<InformationPage> {
                   color: AppColor.grey,
                 ),
                 const SizedBox(
-                  height: 20.0,
+                  height: 30.0,
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Image.asset(
-                      Assets.images.cakho.path,
-                      width: 120.0,
-                      fit: BoxFit.fill,
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Image.asset(
-                      Assets.images.comchien.path,
-                      width: 120.0,
-                      fit: BoxFit.fill,
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Image.asset(
-                      Assets.images.thitkho.path,
-                      width: 120.0,
-                      fit: BoxFit.fill,
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(6.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Cá Kho',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        'Cơm chiên',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        'Thịt Kho',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w500,
-                        ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  height: 40.0,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColor.white.withOpacity(0.98),
+                    border: Border.all(color: AppColor.red.withOpacity(0.98)),
+                    borderRadius: BorderRadius.circular(8.6),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: AppColor.shadow,
+                        offset: Offset(0.0, 3.0),
+                        blurRadius: 6.0,
                       ),
                     ],
+                  ),
+                  child: const Text(
+                    'Trần Văn Mạnh',
+                    style: TextStyle(
+                      color: AppColor.black,
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 45.0,
+                ),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  height: 40.0,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: AppColor.white.withOpacity(0.98),
+                    border: Border.all(color: AppColor.red.withOpacity(0.98)),
+                    borderRadius: BorderRadius.circular(8.6),
+                    boxShadow: const [
+                      BoxShadow(
+                        color: AppColor.shadow,
+                        offset: Offset(0.0, 3.0),
+                        blurRadius: 6.0,
+                      ),
+                    ],
+                  ),
+                  child: const Text(
+                    'Võ Đức Minh',
+                    style: TextStyle(
+                      color: AppColor.black,
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ],

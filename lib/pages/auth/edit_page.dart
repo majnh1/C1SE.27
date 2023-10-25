@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:capstone_flutter/components/app_avartar.dart';
 import 'package:capstone_flutter/components/app_bar/foodie_app_bar2.dart';
+import 'package:capstone_flutter/components/app_dialog.dart';
 import 'package:capstone_flutter/resources/app_color.dart';
 import 'package:capstone_flutter/services/share_prefs.dart';
 import 'package:file_picker/file_picker.dart';
@@ -120,24 +121,27 @@ class _EditPageState extends State<EditPage> {
             const SizedBox(
               height: 50.0,
             ),
-            const Row(
-              children: [
-                Icon(
-                  Icons.logout,
-                  size: 30.0,
-                ),
-                SizedBox(
-                  width: 5.0,
-                ),
-                Text(
-                  'Logout',
-                  style: TextStyle(
-                    fontSize: 17.0,
-                    color: AppColor.black,
-                    fontWeight: FontWeight.w400,
+            GestureDetector(
+              onTap: () => AppDialog.confirmExitApp(context),
+              child: const Row(
+                children: [
+                  Icon(
+                    Icons.logout,
+                    size: 30.0,
                   ),
-                ),
-              ],
+                  SizedBox(
+                    width: 5.0,
+                  ),
+                  Text(
+                    'Logout',
+                    style: TextStyle(
+                      fontSize: 17.0,
+                      color: AppColor.black,
+                      fontWeight: FontWeight.w400,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

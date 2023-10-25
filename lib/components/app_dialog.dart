@@ -16,7 +16,7 @@ class AppDialog {
             Expanded(
               child: Text(
                 'Do you want to exit app?',
-                style: AppStyle.h18Normal.copyWith(color: AppColor.brown),
+                style: AppStyle.h20Normal.copyWith(color: AppColor.red),
                 textAlign: TextAlign.center,
               ),
             )
@@ -24,7 +24,7 @@ class AppDialog {
         ),
         actions: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               AppElevatedButton.smallOutline(
                 onPressed: () => Navigator.pop(context, true),
