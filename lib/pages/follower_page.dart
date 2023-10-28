@@ -9,14 +9,14 @@ import 'package:capstone_flutter/services/share_prefs.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
-class FollowingPage extends StatefulWidget {
-  const FollowingPage({super.key});
+class FollowerPage extends StatefulWidget {
+  const FollowerPage({super.key});
 
   @override
-  State<FollowingPage> createState() => _FollowingPageState();
+  State<FollowerPage> createState() => _FollowerPageState();
 }
 
-class _FollowingPageState extends State<FollowingPage> {
+class _FollowerPageState extends State<FollowerPage> {
   SharedPrefs prefs = SharedPrefs();
   String? avatar;
 
@@ -123,7 +123,7 @@ class _FollowingPageState extends State<FollowingPage> {
                 ),
                 const Positioned(
                   child: Text(
-                    'Đang Theo Dõi',
+                    'Người theo dõi',
                     style: TextStyle(
                       fontSize: 20.0,
                       color: AppColor.black,

@@ -4,7 +4,11 @@ import 'package:capstone_flutter/components/app_avartar.dart';
 import 'package:capstone_flutter/components/app_bar/foodie_app_bar1.dart';
 import 'package:capstone_flutter/components/button/app_elevated_button.dart';
 import 'package:capstone_flutter/components/gen/assets_gen.dart';
+import 'package:capstone_flutter/models/foodie_model.dart';
+import 'package:capstone_flutter/models/user_model.dart';
 import 'package:capstone_flutter/pages/auth/edit_page.dart';
+import 'package:capstone_flutter/pages/detail_foodie.dart';
+import 'package:capstone_flutter/pages/follower_page.dart';
 import 'package:capstone_flutter/pages/following_page.dart';
 import 'package:capstone_flutter/resources/app_color.dart';
 import 'package:capstone_flutter/services/share_prefs.dart';
@@ -25,6 +29,11 @@ class InformationPage extends StatefulWidget {
 class _InformationPageState extends State<InformationPage> {
   SharedPrefs prefs = SharedPrefs();
   String? avatar;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   Future<void> _pickAvatar() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -108,6 +117,10 @@ class _InformationPageState extends State<InformationPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     AppElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const FollowerPage()));
+                      },
                       text: 'Người Theo Dõi',
                     ),
                     const SizedBox(
@@ -116,7 +129,7 @@ class _InformationPageState extends State<InformationPage> {
                     AppElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => FollowingPage()));
+                            builder: (context) => const FollowingPage()));
                       },
                       text: 'Đang Theo Dõi',
                     ),
@@ -157,10 +170,29 @@ class _InformationPageState extends State<InformationPage> {
                     const SizedBox(
                       width: 10.0,
                     ),
-                    Image.asset(
-                      Assets.images.cakho.path,
-                      width: 120.0,
-                      fit: BoxFit.fill,
+                    GestureDetector(
+                      onTap: () {
+                        int foodieIndex = 0;
+                        int userIndex = 0;
+                        if (foodieIndex >= 0 &&
+                            foodieIndex < foods.length &&
+                            userIndex >= 0 &&
+                            userIndex < users.length) {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => detailFoodie(
+                                foodie: foods[foodieIndex],
+                                user: users[userIndex],
+                              ),
+                            ),
+                          );
+                        }
+                      },
+                      child: Image.asset(
+                        Assets.images.cakho.path,
+                        width: 120.0,
+                        fit: BoxFit.fill,
+                      ),
                     ),
                     const SizedBox(
                       width: 10.0,

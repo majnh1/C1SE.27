@@ -36,6 +36,10 @@ class $AssetsImagesGen {
   /// File path: assets/images/thitkho.png
   AssetGenImage get thitkho => const AssetGenImage('assets/images/thitkho.png');
 
+  /// File path: assets/images/bigThitkho.png
+  AssetGenImage get bigThitkho =>
+      const AssetGenImage('assets/images/bigThitkho.png');
+
   /// List of all assets
   List<AssetGenImage> get values => [
         logo1,
@@ -45,6 +49,7 @@ class $AssetsImagesGen {
         cakho,
         comchien,
         thitkho,
+        bigThitkho,
       ];
 }
 
