@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:capstone_flutter/components/app_avartar.dart';
 import 'package:capstone_flutter/components/app_bar/foodie_app_bar1.dart';
 import 'package:capstone_flutter/components/button/app_elevated_button.dart';
-import 'package:capstone_flutter/components/gen/assets_gen.dart';
+import 'package:capstone_flutter/models/category_user.dart';
 import 'package:capstone_flutter/models/foodie_model.dart';
 import 'package:capstone_flutter/models/user_model.dart';
 import 'package:capstone_flutter/pages/auth/edit_page.dart';
@@ -167,85 +167,31 @@ class _InformationPageState extends State<InformationPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        int foodieIndex = 0;
-                        int userIndex = 0;
-                        if (foodieIndex >= 0 &&
-                            foodieIndex < foods.length &&
-                            userIndex >= 0 &&
-                            userIndex < users.length) {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => detailFoodie(
-                                foodie: foods[foodieIndex],
-                                user: users[userIndex],
-                              ),
+                    ...List.generate(categories.length, (index) {
+                      return Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => detailFoodie(
+                                    foodie: foods[0],
+                                    user: users[0],
+                                    category: categories[index],
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Image.asset(
+                              categories[index].image ?? '',
+                              fit: BoxFit.fill,
                             ),
-                          );
-                        }
-                      },
-                      child: Image.asset(
-                        Assets.images.cakho.path,
-                        width: 120.0,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Image.asset(
-                      Assets.images.comchien.path,
-                      width: 120.0,
-                      fit: BoxFit.fill,
-                    ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Image.asset(
-                      Assets.images.thitkho.path,
-                      width: 120.0,
-                      fit: BoxFit.fill,
-                    ),
+                          ),
+                          Text(categories[index].name ?? ''),
+                        ],
+                      );
+                    })
                   ],
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(6.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Cá Kho',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        'Cơm chiên',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        'Thịt Kho',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          color: AppColor.black,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
                 ),
               ],
             ),

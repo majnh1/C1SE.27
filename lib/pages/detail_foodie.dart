@@ -2,8 +2,8 @@ import 'dart:io';
 
 import 'package:capstone_flutter/components/app_avartar.dart';
 import 'package:capstone_flutter/components/button/app_elevated_button.dart';
-import 'package:capstone_flutter/components/gen/assets_gen.dart';
 import 'package:capstone_flutter/components/text_field/app_text_field_comment.dart';
+import 'package:capstone_flutter/models/category_user.dart';
 import 'package:capstone_flutter/models/foodie_model.dart';
 import 'package:capstone_flutter/models/user_model.dart';
 import 'package:capstone_flutter/resources/app_color.dart';
@@ -11,16 +11,19 @@ import 'package:capstone_flutter/services/share_prefs.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:capstone_flutter/components/gen/assets_gen.dart';
 
 class detailFoodie extends StatefulWidget {
   const detailFoodie({
     Key? key,
     required this.foodie,
     required this.user,
+    required this.category,
   }) : super(key: key);
 
   final FoodieModel foodie;
   final UserModel user;
+  final CategoryUser category;
 
   @override
   State<detailFoodie> createState() => _detailFoodieState();
@@ -90,7 +93,7 @@ class _detailFoodieState extends State<detailFoodie> {
                     margin: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: ClipRRect(
                       child: Image.asset(
-                        Assets.images.bigThitkho.path,
+                        widget.category.image ?? '',
                         width: 400.0,
                       ),
                     ),
@@ -99,7 +102,7 @@ class _detailFoodieState extends State<detailFoodie> {
                     height: 10.0,
                   ),
                   Text(
-                    widget.foodie.name.toString(),
+                    widget.category.name ?? '',
                     style: const TextStyle(
                       fontSize: 25.0,
                       fontWeight: FontWeight.w500,
@@ -119,25 +122,28 @@ class _detailFoodieState extends State<detailFoodie> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Row(
-                      children: [
-                        const Text(
-                          'Cooking Time: ',
-                          style: TextStyle(
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.w500,
+                  ...List.generate(foods.length, (index) {
+                    return GestureDetector(
+                      child: Row(
+                        children: [
+                          const Text(
+                            'Cooking Time: ',
+                            style: TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
-                        ),
-                        Text(
-                          widget.foodie.cookingTime.toString(),
-                          style: const TextStyle(
-                              fontSize: 15.0, fontWeight: FontWeight.w400),
-                        ),
-                      ],
-                    ),
-                  ),
+                          Text(
+                            foods[index].cookingTime ?? '',
+                            style: const TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }),
                   const SizedBox(
                     height: 5.0,
                   ),
@@ -265,7 +271,7 @@ class _detailFoodieState extends State<detailFoodie> {
                     ],
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 15.0,
                   ),
                   AppElevatedButton.outline(
                     text: 'Link Video',
@@ -274,7 +280,7 @@ class _detailFoodieState extends State<detailFoodie> {
                     height: 10.0,
                   ),
                   Text(
-                    widget.foodie.videoUrl.toString(),
+                    widget.foodie.videoUrl ?? '',
                   ),
                   const SizedBox(
                     height: 20.0,
@@ -314,101 +320,44 @@ class _detailFoodieState extends State<detailFoodie> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  Row(
-                    children: [
-                      AppAvatar(
-                        avatar: avatar,
-                        isActive: false,
-                      ),
-                      const SizedBox(
-                        width: 20.0,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                  ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      return Row(
                         children: [
-                          Text(
-                            getUserNameByID(widget.user.userID).toString(),
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                            ),
+                          AppAvatar(
+                            avatar: avatar,
+                            isActive: true,
                           ),
-                          Text(
-                            widget.user.comment.toString(),
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                            ),
+                          const SizedBox(
+                            width: 10.0,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                users[index].name ?? '',
+                                style: const TextStyle(
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              Text(
+                                users[index].comment ?? '',
+                                style: const TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: [
-                      AppAvatar(
-                        avatar: avatar,
-                        isActive: false,
-                      ),
-                      const SizedBox(
-                        width: 20.0,
-                      ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            widget.user.name ?? '',
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(
-                            widget.user.comment ?? '',
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: [
-                      AppAvatar(
-                        avatar: avatar,
-                        isActive: false,
-                      ),
-                      const SizedBox(
-                        width: 20.0,
-                      ),
-                      const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Cẩm',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          Text(
-                            'Thèm chảy nước dãi.',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
+                      );
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 10.0),
+                    itemCount: users.length,
                   ),
                   const SizedBox(
                     height: 20.0,
