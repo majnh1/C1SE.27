@@ -1,3 +1,4 @@
+import 'dart:ffi';
 import 'dart:io';
 
 import 'package:capstone_flutter/components/app_avartar.dart';
@@ -22,8 +23,6 @@ class InformationPage extends StatefulWidget {
 
   @override
   State<InformationPage> createState() => _InformationPageState();
-
-  Size get preferredSize => const Size.fromHeight(86.0);
 }
 
 class _InformationPageState extends State<InformationPage> {
@@ -175,7 +174,7 @@ class _InformationPageState extends State<InformationPage> {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                   builder: (context) => detailFoodie(
-                                    foodie: foods[0],
+                                    foodie: foods[index],
                                     user: users[0],
                                     category: categories[index],
                                   ),
@@ -187,7 +186,13 @@ class _InformationPageState extends State<InformationPage> {
                               fit: BoxFit.fill,
                             ),
                           ),
-                          Text(categories[index].name ?? ''),
+                          Text(
+                            categories[index].name ?? '',
+                            style: const TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
                         ],
                       );
                     })

@@ -11,7 +11,6 @@ import 'package:capstone_flutter/services/share_prefs.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:capstone_flutter/components/gen/assets_gen.dart';
 
 class detailFoodie extends StatefulWidget {
   const detailFoodie({
@@ -91,11 +90,8 @@ class _detailFoodieState extends State<detailFoodie> {
                   Container(
                     padding: const EdgeInsets.all(4.0),
                     margin: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: ClipRRect(
-                      child: Image.asset(
-                        widget.category.image ?? '',
-                        width: 400.0,
-                      ),
+                    child: Image.asset(
+                      widget.foodie.imageUrl ?? '',
                     ),
                   ),
                   const SizedBox(
@@ -122,28 +118,26 @@ class _detailFoodieState extends State<detailFoodie> {
                   const SizedBox(
                     height: 10.0,
                   ),
-                  ...List.generate(foods.length, (index) {
-                    return GestureDetector(
-                      child: Row(
-                        children: [
-                          const Text(
-                            'Cooking Time: ',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w500,
-                            ),
+                  GestureDetector(
+                    child: Row(
+                      children: [
+                        const Text(
+                          'Cooking Time: ',
+                          style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w500,
                           ),
-                          Text(
-                            foods[index].cookingTime ?? '',
-                            style: const TextStyle(
-                              fontSize: 15.0,
-                              fontWeight: FontWeight.w400,
-                            ),
+                        ),
+                        Text(
+                          widget.foodie.cookingTime ?? '',
+                          style: const TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w400,
                           ),
-                        ],
-                      ),
-                    );
-                  }),
+                        ),
+                      ],
+                    ),
+                  ),
                   const SizedBox(
                     height: 5.0,
                   ),
@@ -163,7 +157,11 @@ class _detailFoodieState extends State<detailFoodie> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(_formatIngredients(widget.foodie.ingredients)),
+                          Text(
+                            _formatIngredients(
+                              widget.foodie.ingredients,
+                            ),
+                          ),
                         ],
                       ),
                     ],
