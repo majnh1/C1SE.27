@@ -1,6 +1,4 @@
-import 'dart:ffi';
 import 'dart:io';
-
 import 'package:capstone_flutter/components/app_avartar.dart';
 import 'package:capstone_flutter/components/app_bar/foodie_app_bar1.dart';
 import 'package:capstone_flutter/components/button/app_elevated_button.dart';
