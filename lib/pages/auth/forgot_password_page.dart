@@ -24,11 +24,14 @@ class _ForgotPasswordState extends State<ForgotPassword> {
             const SizedBox(
               height: 200.0,
             ),
-            const Align(
+            Align(
               alignment: Alignment.center,
               child: Text(
                 'Reset Password',
-                style: AppStyle.h24Normal,
+                style: AppStyle.h24Normal.copyWith(
+                  color: AppColor.red,
+                  fontWeight: FontWeight.w500,
+                ),
               ),
             ),
             const SizedBox(height: 16.0),
@@ -36,8 +39,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               alignment: Alignment.center,
               child: Text(
                 'Please enter your email address',
-                style: AppStyle.h16Medium.copyWith(
-                    fontWeight: FontWeight.w600, color: AppColor.grey),
+                style: AppStyle.h16Medium
+                    .copyWith(fontWeight: FontWeight.w600, color: AppColor.red),
               ),
             ),
             const SizedBox(

@@ -7,10 +7,12 @@ import 'package:capstone_flutter/models/category_user.dart';
 import 'package:capstone_flutter/models/foodie_model.dart';
 import 'package:capstone_flutter/models/user_model.dart';
 import 'package:capstone_flutter/resources/app_color.dart';
+import 'package:capstone_flutter/resources/app_style.dart';
 import 'package:capstone_flutter/services/share_prefs.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class detailFoodie extends StatefulWidget {
   const detailFoodie({
@@ -59,6 +61,10 @@ class _detailFoodieState extends State<detailFoodie> {
 
   String _formatIngredients(List<String> ingredients) {
     return ingredients.join('\n');
+  }
+
+  String _formatSteps(List<String> steps) {
+    return steps.join('\n');
   }
 
   String? getUserNameByID(String? userID) {
@@ -179,106 +185,57 @@ class _detailFoodieState extends State<detailFoodie> {
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        '1: ',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          widget.foodie.step1.toString(),
-                          style: const TextStyle(
-                            fontSize: 15.0,
+                  ListView.separated(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) {
+                      int stepNumber = index + 1;
+                      String stepText = widget.foodie.steps[index];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            '$stepNumber:  $stepText',
+                            style: const TextStyle(
+                              fontSize: 15.0,
+                              fontWeight: FontWeight.w400,
+                            ),
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    height: 30.0,
-                    thickness: 1.2,
-                    indent: 20.0,
-                    endIndent: 20.0,
-                    color: AppColor.grey,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        '2: ',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          widget.foodie.step2 as String,
-                          style: const TextStyle(
-                            fontSize: 15.0,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const Divider(
-                    height: 30.0,
-                    thickness: 1.2,
-                    indent: 20.0,
-                    endIndent: 20.0,
-                    color: AppColor.grey,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        '3: ',
-                        style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(
-                        width: 10.0,
-                      ),
-                      SizedBox(
-                        width: double.infinity,
-                        child: Text(
-                          widget.foodie.step3 as String,
-                          style: const TextStyle(
-                            fontSize: 15.0,
-                          ),
-                        ),
-                      ),
-                    ],
+                        ],
+                      );
+                    },
+                    separatorBuilder: (context, index) =>
+                        const SizedBox(height: 10.0),
+                    itemCount: widget.foodie.steps.length,
                   ),
                   const SizedBox(
                     height: 15.0,
                   ),
-                  AppElevatedButton.outline(
-                    text: 'Link Video',
-                  ),
                   const SizedBox(
                     height: 10.0,
                   ),
-                  Text(
-                    widget.foodie.videoUrl ?? '',
+                  Column(
+                    children: [
+                      GestureDetector(
+                        onTap: () async {
+                          if (await canLaunch(widget.foodie.videoUrl ?? '')) {
+                            await launch(widget.foodie.videoUrl ?? '');
+                          } else {
+                            //
+                          }
+                        },
+                        child: AppElevatedButton.outline(
+                          text: 'Link Video',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 10.0,
+                      ),
+                      Text(
+                        widget.foodie.videoUrl ?? '',
+                        style: AppStyle.h16Medium,
+                      ),
+                    ],
                   ),
                   const SizedBox(
                     height: 20.0,

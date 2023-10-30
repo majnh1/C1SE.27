@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'dart:math' as math;
 import 'package:capstone_flutter/components/app_avartar.dart';
+import 'package:capstone_flutter/models/user_model.dart';
 import 'package:capstone_flutter/pages/auth/login_page.dart';
 import 'package:capstone_flutter/pages/information_page.dart';
 import 'package:capstone_flutter/resources/app_color.dart';
@@ -105,7 +106,10 @@ class _FoodieAppBarState extends State<FoodieAppBar> {
           Text(widget.title, style: AppStyle.h22Normal),
           GestureDetector(
             onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const InformationPage()),
+              MaterialPageRoute(
+                  builder: (context) => InformationPage(
+                        user: UserModel(),
+                      )),
             ),
             child: AppAvatar(avatar: avatar, isActive: true),
           ),

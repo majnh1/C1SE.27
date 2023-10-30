@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:math' as math;
+import 'package:capstone_flutter/models/user_model.dart';
 import 'package:capstone_flutter/pages/information_page.dart';
 import 'package:capstone_flutter/resources/app_color.dart';
 import 'package:capstone_flutter/resources/app_style.dart';
@@ -74,8 +75,11 @@ class _FoodieAppBar2State extends State<FoodieAppBar2> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: () => Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (_) => const InformationPage())),
+            onTap: () =>
+                Navigator.of(context).pushReplacement(MaterialPageRoute(
+                    builder: (_) => InformationPage(
+                          user: UserModel(),
+                        ))),
             child: Transform.rotate(
               angle: 45 * math.pi / 180,
               child: Container(

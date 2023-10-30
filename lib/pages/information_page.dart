@@ -17,7 +17,10 @@ import 'package:flutter/material.dart';
 class InformationPage extends StatefulWidget {
   const InformationPage({
     super.key,
+    required this.user,
   });
+
+  final UserModel user;
 
   @override
   State<InformationPage> createState() => _InformationPageState();
@@ -26,6 +29,7 @@ class InformationPage extends StatefulWidget {
 class _InformationPageState extends State<InformationPage> {
   SharedPrefs prefs = SharedPrefs();
   String? avatar;
+  List<UserModel> user = [];
 
   @override
   void initState() {
@@ -61,7 +65,7 @@ class _InformationPageState extends State<InformationPage> {
         title: 'Thông Tin Cá Nhân         ',
       ),
       body: Stack(
-        children: [
+        children: <Widget>[
           Positioned(
             left: 30.0,
             top: 30.0,
@@ -81,6 +85,7 @@ class _InformationPageState extends State<InformationPage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
+                      // widget.user.name ?? '',
                       'Vo Duc Minh',
                       style: TextStyle(
                         fontSize: 20.0,
@@ -169,7 +174,7 @@ class _InformationPageState extends State<InformationPage> {
                                 MaterialPageRoute(
                                   builder: (context) => detailFoodie(
                                     foodie: foods[index],
-                                    user: users[0],
+                                    user: users[index],
                                     category: categories[index],
                                   ),
                                 ),

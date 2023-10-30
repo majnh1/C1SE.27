@@ -26,7 +26,7 @@ class _ResetFormState extends State<ResetForm> {
           contentPadding: EdgeInsets.symmetric(horizontal: 16.0),
           border: InputBorder.none,
           hintText: 'Email',
-          hintStyle: TextStyle(color: AppColor.grey),
+          hintStyle: TextStyle(color: AppColor.black),
           focusedBorder: UnderlineInputBorder(
             borderSide: BorderSide(color: AppColor.grey),
           ),
