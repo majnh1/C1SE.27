@@ -291,6 +291,13 @@ class _detailFoodieState extends State<detailFoodie> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  const Divider(
+                    height: 15.0,
+                    thickness: 1.2,
+                    indent: 20.0,
+                    endIndent: 20.0,
+                    color: AppColor.grey,
+                  ),
                   RatingBar.builder(
                     initialRating: 3,
                     minRating: 1,
@@ -304,8 +311,15 @@ class _detailFoodieState extends State<detailFoodie> {
                     ),
                     onRatingUpdate: (rating) {},
                   ),
+                  const Divider(
+                    height: 15.0,
+                    thickness: 1.2,
+                    indent: 20.0,
+                    endIndent: 20.0,
+                    color: AppColor.grey,
+                  ),
                   const SizedBox(
-                    height: 30.0,
+                    height: 15.0,
                   ),
                   const Text(
                     'Comments',
@@ -315,8 +329,12 @@ class _detailFoodieState extends State<detailFoodie> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
+                  const Divider(
+                    height: 15.0,
+                    thickness: 1.2,
+                    indent: 20.0,
+                    endIndent: 20.0,
+                    color: AppColor.grey,
                   ),
                   ListView.separated(
                     physics: const NeverScrollableScrollPhysics(),

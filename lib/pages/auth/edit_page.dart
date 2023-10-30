@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:capstone_flutter/components/app_avartar.dart';
+import 'package:capstone_flutter/components/app_avatar_camera.dart';
 import 'package:capstone_flutter/components/app_bar/foodie_app_bar2.dart';
 import 'package:capstone_flutter/components/app_dialog.dart';
 import 'package:capstone_flutter/resources/app_color.dart';
@@ -58,7 +58,11 @@ class _EditPageState extends State<EditPage> {
               height: 25.0,
             ),
             GestureDetector(
-              child: AppAvatar(
+              onTap: () async {
+                await _pickAvatar();
+                _getAvatar();
+              },
+              child: AppAvatar1(
                 avatar: avatar,
                 isActive: true,
               ),

@@ -42,16 +42,25 @@ class _CartPageState extends State<CartPage> {
                   endIndent: 20.0,
                   color: AppColor.grey,
                 ),
-                const Align(
-                  alignment: Alignment(-0.9, 0),
-                  child: Text(
-                    'Trang Chủ',
-                    style: TextStyle(
-                      fontSize: 20.0,
-                      height: 3.0,
-                      color: AppColor.black,
-                      fontWeight: FontWeight.w500,
-                    ),
+                const Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Trang Chủ',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          height: 3.0,
+                          color: AppColor.black,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(
+                        Icons.notifications_none_outlined,
+                        color: AppColor.orange,
+                      ),
+                    ],
                   ),
                 ),
                 Positioned(

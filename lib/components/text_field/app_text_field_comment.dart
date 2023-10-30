@@ -7,7 +7,7 @@ class AppTextFieldComment extends StatelessWidget {
     super.key,
     this.controller,
     required this.hintext,
-    this.borderRadius = const BorderRadius.all(Radius.circular(30.0)),
+    this.borderRadius = const BorderRadius.all(Radius.circular(15.0)),
     this.textInputAction,
   });
 
@@ -20,7 +20,7 @@ class AppTextFieldComment extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 54, 51, 51).withOpacity(0.4),
+        color: const Color.fromARGB(255, 134, 128, 128).withOpacity(0.4),
         borderRadius: borderRadius,
       ),
       child: TextField(
@@ -32,7 +32,7 @@ class AppTextFieldComment extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintext,
           hintStyle: AppStyle.h16Normal.copyWith(
-            color: AppColor.black,
+            color: const Color.fromARGB(255, 44, 38, 38),
           ),
         ),
       ),

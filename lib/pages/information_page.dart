@@ -78,6 +78,7 @@ class _InformationPageState extends State<InformationPage> {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const Text(
                       'Vo Duc Minh',
@@ -88,25 +89,26 @@ class _InformationPageState extends State<InformationPage> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const SizedBox(
-                      width: 170.0,
-                    ),
-                    const Image(
-                      image: AssetImage('assets/images/Vector.png'),
-                    ),
-                    const SizedBox(
-                      width: 20.0,
-                    ),
-                    AppElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                              builder: (context) => const EditPage(
-                                    icon: Icon(Icons.logout),
-                                  )),
-                        );
-                      },
-                      text: 'Edit',
+                    Row(
+                      children: [
+                        const Image(
+                          image: AssetImage('assets/images/Vector.png'),
+                        ),
+                        const SizedBox(
+                          width: 15.0,
+                        ),
+                        AppElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (context) => const EditPage(
+                                        icon: Icon(Icons.logout),
+                                      )),
+                            );
+                          },
+                          text: 'Edit',
+                        ),
+                      ],
                     ),
                   ],
                 ),
@@ -120,18 +122,12 @@ class _InformationPageState extends State<InformationPage> {
                       },
                       text: 'Người Theo Dõi',
                     ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
                     AppElevatedButton(
                       onPressed: () {
                         Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => const FollowingPage()));
                       },
                       text: 'Đang Theo Dõi',
-                    ),
-                    const SizedBox(
-                      width: 10.0,
                     ),
                     AppElevatedButton(
                       text: 'Món Ăn',
@@ -147,7 +143,7 @@ class _InformationPageState extends State<InformationPage> {
                     style: TextStyle(
                       fontSize: 20.0,
                       color: AppColor.black,
-                      fontWeight: FontWeight.w400,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
@@ -156,7 +152,7 @@ class _InformationPageState extends State<InformationPage> {
                   thickness: 1.2,
                   indent: 20.0,
                   endIndent: 20.0,
-                  color: AppColor.grey,
+                  color: AppColor.orange,
                 ),
                 const SizedBox(
                   height: 20.0,
@@ -183,6 +179,9 @@ class _InformationPageState extends State<InformationPage> {
                               categories[index].image ?? '',
                               fit: BoxFit.fill,
                             ),
+                          ),
+                          const SizedBox(
+                            height: 15.0,
                           ),
                           Text(
                             categories[index].name ?? '',
